@@ -1,0 +1,14 @@
+.search-car {
+  display: grid;
+  flex-direction: row;
+  justify-content: space-evenly;
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin: 30px;
+}
+.search-box {
+  box-shadow: 0 10px 40px 0 #b0c1d9;
+}
+.exportCsv {
+  margin-bottom: 10px;
+}

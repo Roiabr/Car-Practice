@@ -1,0 +1,86 @@
+
+<form autocomplete="off" #form="ngForm" (ngSubmit)="processForm(form.value); ">
+    <fieldset>
+        <legend>Car info</legend>
+        <div class="form-group col-md-6">
+            <input type="hidden" [(ngModel)] = "car.id" ngModel name="id">
+            <label for="plate_id">Car Plate</label>
+            <input class="form-control" required minlength="1" maxlength="10" #plate_id="ngModel" type="text" [(ngModel)] = "car.plate_id" #plate_id="ngModel" id="plate_id" name="plate_id"  >
+            <div *ngIf="plate_id.invalid && (plate_id.touched || plate_id.dirty)">
+
+                <p *ngIf="plate_id.errors.required" class="text-danger">Value is required!</p>
+                <p *ngIf="plate_id.errors.maxlength" class="text-danger">Max length is {{ plate_id.errors.maxlength.requiredLength }} characters</p>
+                <p *ngIf="plate_id.errors.minlength" class="text-danger">Min length is {{ plate_id.errors.minlength.requiredLength }} characters</p>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="model">Model</label>
+            <select  class="form-control" required type="number" #model="ngModel" [(ngModel)] = "car.model" id="model" name="model">
+                <option *ngFor="let model of models" [ngValue]="model.id">{{model.id + " " +  model.model}} </option>
+              </select>
+        </div>
+        
+        <div class="form-group col-md-6">
+            <label for="four_on_four">4X4</label>
+            <input class="form-control" required  #four_on_four="ngModel" type="checkbox" [(ngModel)] = "car.four_on_four" id="four_on_four" name="four_on_four">
+            
+        </div>
+        
+        <div class="form-group col-md-6">
+            <label for="engine_size">Engine Size</label>
+            <input class="form-control"  #engine_size="ngModel" type="number" [(ngModel)] = "car.engine_size" id="engine_size" name="engine_size">
+        </div>
+        
+      
+
+        <div class="clearfix"></div>
+
+        <div class="form-group col-md-6">
+            <label for="year">Year</label>
+            <input class="form-control" required type="number" #year="ngModel" [(ngModel)] = "car.year" id="year" name="year">
+            <div *ngIf="year.invalid && (year.touched || year.dirty)">
+
+                    <p *ngIf="year.errors.required" class="text-danger">Value is required!</p>
+    
+                </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="delivered">Delivered</label>
+            <!-- <input class="form-control"  type="number" #delivered="ngModel" [(ngModel)] = "car.delivered" id="delivered" name="delivered"> -->
+
+            <select  class="form-control"  type="number" #delivered="ngModel" [(ngModel)] = "car.delivered" id="delivered" name="delivered">
+                <option *ngFor="let employee of employees" [ngValue]="employee.id">{{employee.id + " " + employee.first_name + " " + employee.last_name}} </option>
+              </select>
+              
+        </div>
+        <div class="clearfix"></div>
+        
+        <div class="form-group col-md-6">
+            <label for="fix_date">Last Fix </label>
+            <input class="form-control" required type="date" #fix_date="ngModel" [(ngModel)] = "car.fix_date" id="fix_date" name="fix_date">
+        </div>
+        
+        <div class="form-group col-md-6">
+            <label for="last_updated">Last updated </label>
+            <input class="form-control" required type="date" #last_updated="ngModel" [(ngModel)] = "car.last_updated" id="last_updated" name="last_updated">
+        </div>
+       
+        <div class="clearfix"></div>
+        
+        <div class="form-group  col-md-9">
+            <label for="comment">Comments</label>
+            <input class="form-control"  type="text" #comment="ngModel" [(ngModel)] = "car.comment" id="comment" name="comment">
+            
+        </div>
+        
+    </fieldset>
+    
+
+    <div class="btn-group">
+        <button class="btn btn-primary" [disabled]="form.invalid" type="submit"> {{ 'Add Car' }} </button>
+        
+    </div>
+</form>
+

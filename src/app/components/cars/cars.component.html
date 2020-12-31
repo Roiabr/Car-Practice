@@ -1,0 +1,45 @@
+
+<ng-template #noCars>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>Loading cars...</h3>
+        </div>
+    </div>
+</div>
+</ng-template>
+
+<div class="container" *ngIf="cars; else noCars">
+    <div class="search-box">
+        <input class="form-control col-md-12" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching for a car by plate id ">
+    </div>
+    
+    <div class="exportCsv">
+        <button class="btn btn-xl btn-info" (click)="download()" >Export To Excel</button>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <div *ngFor="let car of cars | filter:searchText:plate_id " class="panel panel-info">
+                <div class="panel-heading">
+                    Car Plate Id : {{car.plate_id}} - Car Model: {{car.model}}
+                    <div class="pull-right">
+                        <button class="btn btn-xs btn-info" (click)="showCar(car.id)" >Show Car</button>
+                        <button class="btn btn-xs btn-warning" (click)="editCar(car.id)">Edit</button>
+                        <button class="btn btn-xs btn-danger"(click)="deleteCar(car.id)">Delete</button>
+                       
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"> 4X4 : {{ car.four_on_four }}</li>
+                        <li class="list-group-item">Size Engine: {{ car.engine_size }}</li>
+                        <li class="list-group-item">Delivered To Employee: {{car.delivered }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 well well-sm">
+            <app-cars-add (update)="getCars()" [selectedCar] = "selectedCar"></app-cars-add>
+        </div>
+    </div>
+</div>
